@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Xunit;
 
@@ -7,17 +8,40 @@ namespace ForEvolve.AspNetCore.Localization.Adapters
 {
     public class StringLengthLocalizationValidationAttributeAdapterTest
     {
-        [Fact]
-        public void TODO()
+        private StringLengthLocalizationValidationAttributeAdapter AdapterUnderTest = new StringLengthLocalizationValidationAttributeAdapter();
+
+        public class InternalGetErrorMessageResourceName : StringLengthLocalizationValidationAttributeAdapterTest
         {
-            // Arrange
+            [Fact]
+            public void Should_return_DefaultResourceName()
+            {
+                // Arrange
+                var expectedResourceName = StringLengthLocalizationValidationAttributeAdapter.DefaultResourceName;
+                var attribute = new StringLengthAttribute(50);
 
+                // Act
+                var result = AdapterUnderTest.GetErrorMessageResourceName(attribute);
 
-            // Act
+                // Assert
+                Assert.Equal(expectedResourceName, result);
+            }
 
+            [Fact]
+            public void Should_return_ResourceNameIncludingMinimum_when_MinimumLength_is_greater_than_zero()
+            {
+                // Arrange
+                var expectedResourceName = StringLengthLocalizationValidationAttributeAdapter.ResourceNameIncludingMinimum;
+                var attribute = new StringLengthAttribute(50)
+                {
+                    MinimumLength = 1
+                };
 
-            // Assert
-            throw new NotImplementedException();
+                // Act
+                var result = AdapterUnderTest.GetErrorMessageResourceName(attribute);
+
+                // Assert
+                Assert.Equal(expectedResourceName, result);
+            }
         }
     }
 }
