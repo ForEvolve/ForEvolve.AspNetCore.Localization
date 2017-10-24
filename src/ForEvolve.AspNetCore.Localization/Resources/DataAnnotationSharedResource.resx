@@ -141,7 +141,7 @@
   <data name="RangeAttribute_ErrorMessage" xml:space="preserve">
     <value>The field {0} must be between {1} and {2}.</value>
   </data>
-  <data name="RegexAttribute_ErrorMessage" xml:space="preserve">
+  <data name="RegularExpressionAttribute_ErrorMessage" xml:space="preserve">
     <value>The field {0} must match the regular expression '{1}'.</value>
   </data>
   <data name="RequiredAttribute_ErrorMessage" xml:space="preserve">

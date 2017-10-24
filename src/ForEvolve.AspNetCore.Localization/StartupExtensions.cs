@@ -46,7 +46,8 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 EnableDataAnnotationsLocalization = true,
                 EnableViewLocalization = true,
-                ConfigureValidationMetadataProvider = provider => { }
+                ConfigureValidationMetadataProvider = provider => { },
+                DefaultAdapterOptions = new ForEvolveMvcDefaultLocalizationAdapterOptions()
             };
             setupAction(localizationOptions);
 
@@ -57,7 +58,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 new StringLengthLocalizationValidationAttributeAdapter(),
                 
                 // Keep this one last
-                new DefaultLocalizationValidationAttributeAdapter()
+                new DefaultLocalizationValidationAttributeAdapter(localizationOptions.DefaultAdapterOptions)
             );
             localizationOptions.ConfigureValidationMetadataProvider(defaultValidationMetadataProvider);
 

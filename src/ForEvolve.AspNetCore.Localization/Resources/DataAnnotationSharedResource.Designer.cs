@@ -135,9 +135,9 @@ namespace ForEvolve.AspNetCore.Localization.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The field {0} must match the regular expression &apos;{1}&apos;..
         /// </summary>
-        internal static string RegexAttribute_ErrorMessage {
+        internal static string RegularExpressionAttribute_ErrorMessage {
             get {
-                return ResourceManager.GetString("RegexAttribute_ErrorMessage", resourceCulture);
+                return ResourceManager.GetString("RegularExpressionAttribute_ErrorMessage", resourceCulture);
             }
         }
         
