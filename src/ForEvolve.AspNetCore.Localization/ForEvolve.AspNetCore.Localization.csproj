@@ -10,6 +10,9 @@
     <Copyright>Carl-Hugo Marcotte</Copyright>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
