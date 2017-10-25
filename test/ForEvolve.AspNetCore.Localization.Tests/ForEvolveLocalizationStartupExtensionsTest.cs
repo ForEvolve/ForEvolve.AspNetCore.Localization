@@ -9,7 +9,7 @@ namespace ForEvolve.AspNetCore.Localization
 {
     public class ForEvolveLocalizationStartupExtensionsTest
     {
-        [Fact]
+        [Fact(Skip = "Should Test StartupExtensions")]
         public void TODO()
         {
             // Arrange

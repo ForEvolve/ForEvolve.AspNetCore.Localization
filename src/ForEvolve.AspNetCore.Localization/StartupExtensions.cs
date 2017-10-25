@@ -32,7 +32,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 });
         }
 
-
         public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
         {
             return mvcBuilder
