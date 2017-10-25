@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DebugType>Full</DebugType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.0.0-local-00001</Version>
+    <Version>0.0.0-local-00002</Version>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
     <Copyright>Carl-Hugo Marcotte</Copyright>

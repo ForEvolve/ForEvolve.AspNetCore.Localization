@@ -101,6 +101,16 @@ namespace Microsoft.Extensions.DependencyInjection
             return mvcBuilder;
         }
 
+        public static IApplicationBuilder UseForEvolveRequestLocalization(this IApplicationBuilder app)
+        {
+            var locOptions = app.ApplicationServices.GetService<ForEvolveLocalizationOptions>();
+            if (locOptions == null)
+            {
+                throw new NullReferenceException($"{nameof(ForEvolveLocalizationOptions)} was not found. Please make sure that `services.AddForEvolveLocalization()` has been called in the `ConfigureServices(IServiceCollection services)` method.");
+            }
+            app.UseRequestLocalization(locOptions.RequestLocalizationOptions);
+            return app;
+        }
 
         private static RequestLocalizationOptions CreateDefaultRequestLocalizationOptions(CultureInfo defaultCulture, IList<CultureInfo> supportedCultures)
         {
