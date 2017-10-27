@@ -131,7 +131,7 @@ If you want to create a culture-specific translation, example: `fr-CA`, please m
 ## Error messages
 I modified default error messages a little to make them more linear. Sometimes it was written `The field {0} ...` and sometimes it was `The {0} field ...`. I decided to normalize messages to `The {0} field ...`. 
 
-*I am open to suggestion if you think this makes no sense. English is my only secondary language.*
+*I am open to suggestion if you think this makes no sense. English is only my secondary language.*
 
 Error messages source (if you want the original error messages): [corefx/src/System.ComponentModel.Annotations/src/Resources/Strings.resx](https://github.com/dotnet/corefx/blob/1a76f612ffa3e459aa11add147e71206e4005555/src/System.ComponentModel.Annotations/src/Resources/Strings.resx)
 
