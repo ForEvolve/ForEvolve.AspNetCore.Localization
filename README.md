@@ -64,9 +64,9 @@ As you can see, it took only 3 lines of code to enable localization.
 
 ### Code break down
 
-`services.AddForEvolveLocalization();` add all necessary services to the DI container, including supported resources, resource path, etc. This also calls `services.AddLocalization(...)` for you, defining a default `ResourcesPath`: `"Resources"`. You can change the default (all defaults actually).
+`services.AddForEvolveLocalization();` add all necessary services to the DI container, including supported resources, resource path, etc. This also calls `services.AddLocalization(...)` for you, defining a default `ResourcesPath` to `"Resources"`. You can change the default (all defaults actually).
 
-To configure options (change defaults), you can use pass a second argument of type `Action<ForEvolveLocalizationOptions>` to the `services.AddForEvolveLocalization();` extension method. 
+To configure the options, you can pass a second argument of type `Action<ForEvolveLocalizationOptions>` to the `services.AddForEvolveLocalization();` extension method. 
 
 > To make it easy to use, I made sure that everything is configurable at a single place instead of spreading settings around. 
 
@@ -95,7 +95,7 @@ services
 
 ---
 
-The `IMvcBuilder.AddForEvolveMvcLocalization();` extension method register the `ILocalizationValidationMetadataProvider` (this does the data attribute magic) as well as `AddViewLocalization()` and `AddDataAnnotationsLocalization()`.
+The `IMvcBuilder.AddForEvolveMvcLocalization();` extension method register the `ILocalizationValidationMetadataProvider` (this does the validation attribute localization magic) as well as `AddViewLocalization()` and `AddDataAnnotationsLocalization()`.
 
 You can opt-out by setting `options.MvcOptions.EnableViewLocalization` or `options.MvcOptions.EnableDataAnnotationsLocalization` to `false` (in the call to `services.AddForEvolveLocalization();`).
 
@@ -117,16 +117,16 @@ Since I don't speak all languages, I cannot validate those that I don't know (ex
 
 I will do my best to integrates PR as fast as possible.
 
-### Where are the messages
+### Where are the error messages located?
 If you look under `src/ForEvolve.AspNetCore.Localization/Resources/`, you will find `DataAnnotationSharedResource.resx` and `DataAnnotationSharedResource.{lang}.resx` files.
 You can copy any one of those and translate the values. 
 
-If you want to create a culture-specific translation, example: `en-UK`, please make sure that there is an `en` translation (neutral culture) first which will be the default for that language. 
+If you want to create a culture-specific translation, example: `fr-CA`, please make sure that there is an `fr` translation (neutral culture) first which will be the default for that language. 
 
 **Example:**
 
-- First we need a `DataAnnotationSharedResource.en.resx` file (already there).
-- Then we could add `DataAnnotationSharedResource.en-UK.resx`, `DataAnnotationSharedResource.en-CA.resx`, etc.
+- First we need a `DataAnnotationSharedResource.fr.resx` file (already there).
+- Then we could add `DataAnnotationSharedResource.fr-CA.resx`, `DataAnnotationSharedResource.fr-FR.resx`, etc.
 
 ## Error messages
 I modified default error messages a little to make them more linear. Sometimes it was written `The field {0} ...` and sometimes it was `The {0} field ...`. I decided to normalize messages to `The {0} field ...`. 
