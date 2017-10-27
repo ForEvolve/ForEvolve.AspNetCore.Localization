@@ -20,12 +20,25 @@ namespace Microsoft.Extensions.DependencyInjection
         private static ForEvolveLocalizationOptions Options { get; set; }
         private static ILocalizationValidationMetadataProvider ValidationMetadataProvider { get; set; }
 
+        /// <summary>
+        /// Adds services required for application localization.
+        /// The Asp.Net Core AddLocalization() method will be called.
+        /// </summary>
+        /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the services to.</param>
+        /// <returns>The Microsoft.Extensions.DependencyInjection.IServiceCollection so that additional calls can be chained.</returns>
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services)
         {
             return services
                 .AddForEvolveLocalization(options => { });
         }
 
+        /// <summary>
+        /// Adds services required for application localization.
+        /// The Asp.Net Core AddLocalization() method will be called.
+        /// </summary>
+        /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the services to.</param>
+        /// <param name="setupAction">An System.Action&lt;ForEvolveLocalizationOptions&gt; to configure the ForEvolve.AspNetCore.Localization.ForEvolveLocalizationOptions.</param>
+        /// <returns>The Microsoft.Extensions.DependencyInjection.IServiceCollection so that additional calls can be chained.</returns>
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services, Action<ForEvolveLocalizationOptions> setupAction)
         {
             // Localization Options
@@ -77,6 +90,12 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
+        /// <summary>
+        /// Registers an IMetadataDetailsProvider that handles validation attributes to Microsoft.AspNetCore.Mvc.MvcOptions.
+        /// This also (on an opt-out basis) calls AddViewLocalization() and AddDataAnnotationsLocalization() on the IMvcBuilder.
+        /// </summary>
+        /// <param name="mvcBuilder">The Microsoft.Extensions.DependencyInjection.IMvcBuilder.</param>
+        /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
         public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
         {
             // Add the ValidationMetadataProvider to MVC
@@ -101,6 +120,12 @@ namespace Microsoft.Extensions.DependencyInjection
             return mvcBuilder;
         }
 
+        /// <summary>
+        /// Adds the Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware to automatically set culture information for requests based on information provided by the client.
+        /// This calls UseRequestLocalization().
+        /// </summary>
+        /// <param name="app">The Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
+        /// <returns>The Microsoft.AspNetCore.Builder.IApplicationBuilder so that additional calls can be chained..</returns>
         public static IApplicationBuilder UseForEvolveRequestLocalization(this IApplicationBuilder app)
         {
             var locOptions = app.ApplicationServices.GetService<ForEvolveLocalizationOptions>();
