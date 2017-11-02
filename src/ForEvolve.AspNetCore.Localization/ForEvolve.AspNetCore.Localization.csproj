@@ -13,6 +13,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Allow localization of Asp.Net Core 2.0 applications in a few line of code. This is very useful for ValidationAttributes like [Required]. No need to specify any string or error message, ForEvolve.AspNetCore.Localization do it for you.</Description>
   </PropertyGroup>
 
   <ItemGroup>
