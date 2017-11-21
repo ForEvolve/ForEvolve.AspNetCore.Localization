@@ -42,12 +42,18 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services, Action<ForEvolveLocalizationOptions> setupAction)
         {
             // Localization Options
-            var supportedCultures = new List<CultureInfo>(new[]
+            var supportedCultureRepository = new SupportedCulturesRepository(new[]
             {
                 new CultureInfo("en"),
                 new CultureInfo("fr"),
             });
-            var defaultCulture = supportedCultures.First();
+            var supportedCultures = supportedCultureRepository
+                .ReadAllAsync()
+                .Result
+                .ToList();
+            var defaultCulture = supportedCultureRepository
+                .FindDefaultAsync()
+                .Result;
             var localizationOptions = new ForEvolveLocalizationOptions
             {
                 ResourcesPath = DefaultResourcesPath,
@@ -76,6 +82,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Regiter services
             services
+                .AddSingleton<ISupportedCulturesRepository>(supportedCultureRepository)
                 .AddSingleton(localizationOptions)
                 //.AddSingleton<ILocalizationValidationMetadataProvider>(defaultValidationMetadataProvider)
                 .AddLocalization(options =>
