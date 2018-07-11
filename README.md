@@ -8,8 +8,9 @@ This is very useful for `ValidationAttributes` like `[Required]`. No need to spe
 ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
 
 ## Supported languages:
- - `English`
- - `French`
+ - `English (en)`
+ - `French (fr)`
+ - `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
  
 ## Supported attributes
 
@@ -111,6 +112,7 @@ Since I only know French and English, I can't translate messages into more langu
 1. Fork the repo
 1. Create a resource file for the language you want to translate error messages into.
 1. Translate it (obviously)
+1. Add the new language to the `Supported languages` section of the `README.md` file with a "thanks to you" attribution and link
 1. Open a pull request
 
 Since I don't speak all languages, I cannot validate those that I don't know (except maybe by using Google Translate), so it's up to you to makes things right! (or PR corrections)
