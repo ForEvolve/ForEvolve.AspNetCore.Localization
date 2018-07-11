@@ -46,6 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 new CultureInfo("en"),
                 new CultureInfo("fr"),
+                new CultureInfo("he")
             });
             var defaultCulture = supportedCultures.First();
             var localizationOptions = new ForEvolveLocalizationOptions
