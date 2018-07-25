@@ -1,11 +1,26 @@
 # ForEvolve.AspNetCore.Localization
-[![forevolve MyGet Build Status](https://www.myget.org/BuildSource/Badge/forevolve?identifier=b9aba5cc-96df-42d0-bf33-ed89456a6fdf)](https://www.myget.org/F/forevolve/api/v3/index.json)
+- Pre-release Build Status: [![ForEvolve MyGet pre-release Build Status](https://www.myget.org/BuildSource/Badge/forevolve?identifier=b9aba5cc-96df-42d0-bf33-ed89456a6fdf)](https://www.myget.org/F/forevolve/api/v3/index.json)
+- Release Build status: ![Release Build status](https://forevolve.visualstudio.com/ForEvolve-Framework/_apis/build/status/ForEvolve.AspNetCore.Localization/ForEvolve.AspNetCore.Localization-master?branchName=master)
 
 The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.0 applications in a few line of code.
 
 This is very useful for `ValidationAttributes` like `[Required]`. No need to specify any string or error message, `ForEvolve.AspNetCore.Localization` do it for you.
 
-ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
+## NuGet
+You can:
+
+```cmd
+Install-Package ForEvolve.AspNetCore.Localization
+```
+
+or
+
+```cmd
+dotnet add package ForEvolve.AspNetCore.Localization
+```
+
+## Prerelease MyGet
+For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
 
 ## Supported languages:
  - `English (en)`
