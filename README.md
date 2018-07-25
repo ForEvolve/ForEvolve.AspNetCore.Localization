@@ -19,6 +19,8 @@ or
 dotnet add package ForEvolve.AspNetCore.Localization
 ```
 
+or take a look at [https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/).
+
 ## Prerelease MyGet
 For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
 
