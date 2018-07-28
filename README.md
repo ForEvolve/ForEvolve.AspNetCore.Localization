@@ -1,6 +1,5 @@
 # ForEvolve.AspNetCore.Localization
-- Pre-release Build Status: [![ForEvolve MyGet pre-release Build Status](https://www.myget.org/BuildSource/Badge/forevolve?identifier=b9aba5cc-96df-42d0-bf33-ed89456a6fdf)](https://www.myget.org/F/forevolve/api/v3/index.json)
-- Release Build status: ![Release Build status](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/30/badge)
+![VSTS Build status](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/30/badge)
 
 The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.0 applications in a few line of code.
 
