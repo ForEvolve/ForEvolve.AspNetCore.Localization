@@ -29,7 +29,7 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
  - `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as pt-BR, needs to be checked)
  - `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
- - `Spanish (es-MX), thanks to [Oswaldo Diaz] (https://github.com/OswaldoDG)`
+ - `Spanish (es), thanks to [Oswaldo Diaz] (https://github.com/OswaldoDG)`
  
 ## Supported attributes
 
