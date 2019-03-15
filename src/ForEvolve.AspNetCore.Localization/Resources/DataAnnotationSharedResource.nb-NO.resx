@@ -124,7 +124,7 @@
     <value>Feltet {0} inneholder ikke et gyldig kredittkortnummer.</value>
   </data>
   <data name="EmailAddressAttribute_ErrorMessage" xml:space="preserve">
-    <value>Feltet {0} inneholder ikke en gyldig e-postaddresse.</value>
+    <value>Feltet {0} inneholder ikke en gyldig e-postadresse.</value>
   </data>
   <data name="FileExtensionsAttribute_ErrorMessage" xml:space="preserve">
     <value>Feltet {0} tillater kun filer med følgende filendinger: {1}</value>
@@ -142,7 +142,7 @@
     <value>Feltet {0} må være mellom {1} og {2}.</value>
   </data>
   <data name="RegularExpressionAttribute_ErrorMessage" xml:space="preserve">
-    <value>Feltet {0} må matche mønsteret til regex-en: '{1}'.</value>
+    <value>Feltet {0} må samsvare med det regulære uttrykket (regex): '{1}'.</value>
   </data>
   <data name="RequiredAttribute_ErrorMessage" xml:space="preserve">
     <value>Feltet {0} er påkrevd.</value>
