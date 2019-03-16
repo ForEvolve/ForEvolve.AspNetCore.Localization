@@ -27,9 +27,11 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `English (en)`
  - `French (fr)`
  - `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
- - `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as pt-BR, needs to be checked)
+ - `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
  - `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
  - `Spanish (es)` thanks to [Oswaldo Diaz](https://github.com/OswaldoDG)
+ - `Norwegian (bokmål) (nb)` thanks to [Petter Hoel](https://github.com/petterhoel) (If you are using `nb-NO` it should default to `nb`)
+ - `Norwegian (bokmål) (no)` thanks to [Petter Hoel](https://github.com/petterhoel) (Same as `nb`)
  
 ## Supported attributes
 
