@@ -50,7 +50,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new CultureInfo("pt"),
                 new CultureInfo("pt-BR"),
                 new CultureInfo("es"),
-                new CultureInfo("nb-NO"), 
+                new CultureInfo("no"),
+                new CultureInfo("nb"),
             });
             var defaultCulture = supportedCultures.First();
             var localizationOptions = new ForEvolveLocalizationOptions
