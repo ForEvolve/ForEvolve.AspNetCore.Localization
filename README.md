@@ -1,5 +1,6 @@
 # ForEvolve.AspNetCore.Localization
-![VSTS Build status](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/30/badge)
+[![VSTS Build status](https://forevolve.visualstudio.com/ForEvolve-Framework/_apis/build/status/ForEvolve.AspNetCore.Localization)](https://forevolve.visualstudio.com/ForEvolve-Framework/_build/latest?definitionId=37)
+
 
 The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.0 applications in a few line of code.
 
@@ -127,6 +128,10 @@ The `IApplicationBuilder.UseForEvolveRequestLocalization()` extension method cal
 
 ## How to contribute a translation
 Since I only know French and English, I can't translate messages into more languages, so contributions are very welcome.
+
+I built a small tool to help find the culture-neutral and culture-specifics `CultureInfo` about a language; **please make sure that your translation covers the culture-neutral `CultureInfo` before creating a culture-specific one**.
+
+- [CultureInfo Browser](https://cultureinfobrowser.azurewebsites.net).
 
 **How to submit a new translation:**
 
