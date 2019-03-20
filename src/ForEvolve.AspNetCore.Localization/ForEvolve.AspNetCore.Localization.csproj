@@ -22,7 +22,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.0.1" />
-    <PackageReference Include="Microsoft.CodeCoverage" Version="1.0.3" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="2.0.1" />
   </ItemGroup>
 
