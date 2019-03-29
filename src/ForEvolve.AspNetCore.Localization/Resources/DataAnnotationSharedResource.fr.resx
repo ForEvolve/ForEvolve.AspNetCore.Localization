@@ -130,10 +130,10 @@
     <value>Le champ {0} accepte uniquement les fichiers aux extensions suivantes: {1}</value>
   </data>
   <data name="MaxLengthAttribute_ErrorMessage" xml:space="preserve">
-    <value>Le champ {0} doit avoir d'une longueur maximum de '{1}'.</value>
+    <value>Le champ {0} doit avoir une longueur maximum de '{1}'.</value>
   </data>
   <data name="MinLengthAttribute_ErrorMessage" xml:space="preserve">
-    <value>Le champ {0} doit avoir d'une longueur minimum de '{1}'.</value>
+    <value>Le champ {0} doit avoir une longueur minimum de '{1}'.</value>
   </data>
   <data name="PhoneAttribute_ErrorMessage" xml:space="preserve">
     <value>Le champ {0} est un numéro de téléphone invalide.</value>
