@@ -151,7 +151,7 @@
     <value>Le champ {0} doit être composé d'un maximum de {1} caractères.</value>
   </data>
   <data name="StringLengthAttribute_ErrorMessageIncludingMinimum" xml:space="preserve">
-    <value>Le champ {0} doit être entre {2} and {1} caracters.</value>
+    <value>Le champ {0} doit être entre {2} and {1} caractères.</value>
   </data>
   <data name="UrlAttribute_ErrorMessage" xml:space="preserve">
     <value>Le champ {0} n'est pas une URL pleinement qualifiée valide, commençant par HTTP, HTTP ou FTP.</value>
