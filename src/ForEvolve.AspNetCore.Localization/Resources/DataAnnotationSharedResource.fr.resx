@@ -121,7 +121,7 @@
     <value>Les champs '{0}' et '{1}' ne sont pas identiques.</value>
   </data>
   <data name="CreditCardAttribute_ErrorMessage" xml:space="preserve">
-    <value>Le champ {0} est une numéro de carte de crédit invalide.</value>
+    <value>Le champ {0} est un numéro de carte de crédit invalide.</value>
   </data>
   <data name="EmailAddressAttribute_ErrorMessage" xml:space="preserve">
     <value>Le champ {0} est une adresse courriel invalide.</value>

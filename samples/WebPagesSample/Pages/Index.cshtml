@@ -1,0 +1,71 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form method="post" novalidate>
+    <div asp-validation-summary="All" class="text-danger" id="validationSummary"></div>
+    <div class="form-group">
+        <label asp-for="Model.Compare1"></label>
+        <input class="form-control" asp-for="Model.Compare1">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.Compare2"></label>
+        <input class="form-control" asp-for="Model.Compare2">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.CreditCard"></label>
+        <input class="form-control" asp-for="Model.CreditCard">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.EmailAddress"></label>
+        <input class="form-control" asp-for="Model.EmailAddress">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.FileExtensions"></label>
+        <input class="form-control" asp-for="Model.FileExtensions">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.MaxLength"></label>
+        <input class="form-control" asp-for="Model.MaxLength">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.MinLength"></label>
+        <input class="form-control" asp-for="Model.MinLength">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.Phone"></label>
+        <input class="form-control" asp-for="Model.Phone">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.Range"></label>
+        <input class="form-control" asp-for="Model.Range">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.RegularExpression"></label>
+        <input class="form-control" asp-for="Model.RegularExpression">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.Required"></label>
+        <input class="form-control" asp-for="Model.Required">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.StringLength"></label>
+        <input class="form-control" asp-for="Model.StringLength">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.StringLengthIncludingMinimum"></label>
+        <input class="form-control" asp-for="Model.StringLengthIncludingMinimum">
+    </div>
+    <div class="form-group">
+        <label asp-for="Model.Website"></label>
+        <input class="form-control" asp-for="Model.Website">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
