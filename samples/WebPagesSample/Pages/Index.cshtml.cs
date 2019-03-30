@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebPagesSample.Pages
 {
-    // IgnoreAntiforgeryToken allows tests to post here without worrying about anti-forgery
-    [IgnoreAntiforgeryToken(Order = 1001)]
     public class IndexModel : PageModel
     {
         [BindProperty]

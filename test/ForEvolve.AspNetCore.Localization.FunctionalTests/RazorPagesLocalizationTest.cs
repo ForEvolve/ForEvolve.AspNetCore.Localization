@@ -2,7 +2,11 @@ using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,7 +24,13 @@ namespace ForEvolve.AspNetCore.Localization
         private readonly WebApplicationFactory<Startup> _factory;
         public RazorPagesLocalizationTest(WebApplicationFactory<Startup> factory)
         {
-            _factory = factory ?? throw new ArgumentNullException(nameof(factory));
+            if (factory == null) { throw new ArgumentNullException(nameof(factory)); }
+            
+            // We don't need Antiforgery for tests
+            _factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(services => services
+                .PostConfigure<RazorPagesOptions>(options => options.Conventions
+                    .ConfigureFilter(new IgnoreAntiforgeryTokenAttribute()))
+            ));
         }
 
         [Theory]
