@@ -185,3 +185,32 @@ If you want to contributes some code, other than translating error messages, fee
 To conclude, I hope this is only the beginning of the project. 
 
 *For example, I'd like, at some point, to extract the resources somewhere else, maybe use some other resource provider like a database or JSON files...*
+
+# Change log
+
+## 2.0.0
+
+- Update `MetadataProvider` so `DataTypeAttribute` gets the translation; Fix #21 
+- Add functional tests that are covering most scenarios, related to error messages; closing #1
+- Add functional tests that are covering French translation; related to #5. This should ensure that further breaking changes in the Asp.Net Core repo would be detected automatically by the CI pipeline.
+
+### Possible/Known issues
+
+- User-specified `ErrorMessage` on `DataTypeAttribute` might (will most likely) get overridden by `ForEvolve.AspNetCore.Localization`.
+
+## 1.3.0
+
+- Add `Norwegian (bokmål) (nb)` and `Norwegian (bokmål) (no)`
+
+## 1.2.0
+
+- Add `Spanish (es)`
+
+## 1.1.0
+
+- Add `Portuguese (pt)` and `Brazilian portuguese (pt-BR)`
+
+## 1.0.0
+
+- Initial `French (fr)` and `English (en)`
+- Contributed `Hebrew (he)`
