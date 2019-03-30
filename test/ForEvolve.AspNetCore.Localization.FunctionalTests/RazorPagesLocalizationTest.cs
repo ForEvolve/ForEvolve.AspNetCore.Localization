@@ -39,18 +39,11 @@ namespace ForEvolve.AspNetCore.Localization
 
             var formContent = new FormUrlEncodedContent(dictionary.Select(kv 
                 => new KeyValuePair<string, string>($"Model.{kv.Key}", kv.Value)));
-            
+
+            // Post the "form"
             var response = await client.PostAsync(uri, formContent);
 
-            //// Get the page
-            //var formPage = await client.GetAsync(uri);
-            //var stream = await formPage.Content.ReadAsStreamAsync();
-            //var document = await BrowsingContext.New(config)
-            //    .OpenAsync(m => m.Content(stream).Address(uri));
-
-            //// Submit the form
-            //var form = document.QuerySelector<IHtmlFormElement>("form");
-            //var resultDocument = await form.SubmitAsync();
+            // Parse the response
             var pageContent = await response.Content.ReadAsStringAsync();
             var document = await parser.ParseDocumentAsync(pageContent);
             var summary = document.GetElementById("validationSummary");
