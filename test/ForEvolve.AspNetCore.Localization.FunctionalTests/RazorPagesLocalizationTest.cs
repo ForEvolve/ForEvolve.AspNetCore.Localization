@@ -67,7 +67,7 @@ namespace ForEvolve.AspNetCore.Localization
                 message => Assert.Equal("Les champs 'Compare1' et 'Compare2' ne sont pas identiques.", message),
                 message => Assert.Equal("Le champ CreditCard est une numéro de carte de crédit invalide.", message),
                 message => Assert.Equal("Le champ EmailAddress est une adresse courriel invalide.", message),
-                message => Assert.Equal("Le champ FileExtensions  accepte uniquement les fichiers aux extensions suivantes: .png, .jpg, .jpeg, .gif", message),
+                message => Assert.Equal("Le champ FileExtensions accepte uniquement les fichiers aux extensions suivantes: .png, .jpg, .jpeg, .gif", message),
                 message => Assert.Equal("Le champ MaxLength doit avoir une longueur maximum de '5'.", message),
                 message => Assert.Equal("Le champ MinLength doit avoir une longueur minimum de '5'.", message),
                 message => Assert.Equal("Le champ Phone est un numéro de téléphone invalide.", message),

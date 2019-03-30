@@ -25,7 +25,9 @@ namespace ForEvolve.AspNetCore.Localization
                 {
                     // If there is no custom message, try to find an adapter to set
                     // the ErrorMessageResourceName property automatically.
-                    if (string.IsNullOrWhiteSpace(validationAttr.ErrorMessage))
+                    var hasNoCustomErrorMessage = string.IsNullOrWhiteSpace(validationAttr.ErrorMessage);
+                    var isDataTypeAttribute = validationAttr is DataTypeAttribute;
+                    if (hasNoCustomErrorMessage || isDataTypeAttribute)
                     {
                         foreach (var adapter in Adapters)
                         {
