@@ -28,7 +28,6 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `English (en)`
  - `French (fr)`
  - `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
- - `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
  - `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
  - `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
  - `Spanish (es)` thanks to [Oswaldo Diaz](https://github.com/OswaldoDG)
@@ -37,6 +36,7 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `Chinese (zh)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
  - `Chinese Traditional (zh-Hant)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
  - `Chinese Traditional, Taiwan (zh-TW)` thanks to [Jay Skyworker](https://github.com/jayskyworker)
+ - `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
  
 ## Supported attributes
 
