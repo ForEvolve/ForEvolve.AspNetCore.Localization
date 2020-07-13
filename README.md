@@ -28,6 +28,7 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `English (en)`
  - `French (fr)`
  - `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
+ - `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
  - `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
  - `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
  - `Spanish (es)` thanks to [Oswaldo Diaz](https://github.com/OswaldoDG)
