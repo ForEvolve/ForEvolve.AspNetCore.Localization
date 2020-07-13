@@ -55,6 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 new CultureInfo("zh"),
                 new CultureInfo("zh-Hant"),
                 new CultureInfo("zh-TW"),
+                new CultureInfo("pl"),
             });
             var defaultCulture = supportedCultures.First();
             var localizationOptions = new ForEvolveLocalizationOptions
@@ -177,5 +178,4 @@ namespace Microsoft.Extensions.DependencyInjection
             return requestLocalizationOptions;
         }
     }
-				new CultureInfo("pl"),
 }
