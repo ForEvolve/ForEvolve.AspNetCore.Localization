@@ -121,7 +121,7 @@
     <value>Pole {0} oraz {1} muszą być identyczne.</value>
   </data>
   <data name="RangeAttribute_ErrorMessage" xml:space="preserve">
-    <value>Pole {0} musi być z zakresu od {1} do {2}.</value>
+    <value>Pole {0} musi być w zakresie od {1} do {2}.</value>
   </data>
   <data name="RegularExpressionAttribute_ErrorMessage" xml:space="preserve">
     <value>Pole {0} musi pasować do wyrażenia regularnego {1}.</value>
