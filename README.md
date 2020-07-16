@@ -28,33 +28,33 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
 
 ## Supported languages:
 
-- `English (en)`
-- `French (fr)`
-- `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
-- `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
-- `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
-- `Spanish (es)` thanks to [Oswaldo Diaz](https://github.com/OswaldoDG)
-- `Norwegian (bokmål) (nb)` thanks to [Petter Hoel](https://github.com/petterhoel) (If you are using `nb-NO` it should default to `nb`)
-- `Norwegian (bokmål) (no)` thanks to [Petter Hoel](https://github.com/petterhoel) (Same as `nb`)
-- `Chinese (zh)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
-- `Chinese Traditional (zh-Hant)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
-- `Chinese Traditional, Taiwan (zh-TW)` thanks to [Jay Skyworker](https://github.com/jayskyworker)
-- `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
+-   `English (en)`
+-   `French (fr)`
+-   `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
+-   `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
+-   `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
+-   `Spanish (es)` thanks to [Oswaldo Diaz](https://github.com/OswaldoDG)
+-   `Norwegian (bokmål) (nb)` thanks to [Petter Hoel](https://github.com/petterhoel) (If you are using `nb-NO` it should default to `nb`)
+-   `Norwegian (bokmål) (no)` thanks to [Petter Hoel](https://github.com/petterhoel) (Same as `nb`)
+-   `Chinese (zh)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
+-   `Chinese Traditional (zh-Hant)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
+-   `Chinese Traditional, Taiwan (zh-TW)` thanks to [Jay Skyworker](https://github.com/jayskyworker)
+-   `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
 
 ## Supported attributes
 
-- CompareAttribute
-- EmailAddressAttribute
-- RequiredAttribute
-- CreditCardAttribute
-- FileExtensionsAttribute
-- MaxLengthAttribute
-- MinLengthAttribute
-- PhoneAttribute
-- RangeAttribute
-- RegularExpressionAttribute
-- UrlAttribute
-- StringLengthAttribute (see [StringLengthLocalizationValidationAttributeAdapter.cs](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/src/ForEvolve.AspNetCore.Localization/Adapters/StringLengthLocalizationValidationAttributeAdapter.cs))
+-   CompareAttribute
+-   EmailAddressAttribute
+-   RequiredAttribute
+-   CreditCardAttribute
+-   FileExtensionsAttribute
+-   MaxLengthAttribute
+-   MinLengthAttribute
+-   PhoneAttribute
+-   RangeAttribute
+-   RegularExpressionAttribute
+-   UrlAttribute
+-   StringLengthAttribute (see [StringLengthLocalizationValidationAttributeAdapter.cs](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/src/ForEvolve.AspNetCore.Localization/Adapters/StringLengthLocalizationValidationAttributeAdapter.cs))
 
 See [ForEvolveMvcDefaultLocalizationAdapterOptions.cs](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/src/ForEvolve.AspNetCore.Localization/ForEvolveMvcDefaultLocalizationAdapterOptions.cs) for the list of supported attributes used by the `DefaultLocalizationValidationAttributeAdapter`.
 
@@ -140,7 +140,7 @@ Since I only know French and English, I can't translate messages into more langu
 
 I built a small tool to help find the culture-neutral and culture-specifics `CultureInfo` about a language; **please make sure that your translation covers the culture-neutral `CultureInfo` before creating a culture-specific one**.
 
-- [CultureInfo Browser](https://cultureinfobrowser.azurewebsites.net).
+-   [CultureInfo Browser](https://cultureinfobrowser.azurewebsites.net).
 
 **How to submit a new translation:**
 
@@ -164,8 +164,8 @@ If you want to create a culture-specific translation, example: `fr-CA`, please m
 
 **Example:**
 
-- First we need a `DataAnnotationSharedResource.fr.resx` file (already there).
-- Then we could add `DataAnnotationSharedResource.fr-CA.resx`, `DataAnnotationSharedResource.fr-FR.resx`, etc.
+-   First we need a `DataAnnotationSharedResource.fr.resx` file (already there).
+-   Then we could add `DataAnnotationSharedResource.fr-CA.resx`, `DataAnnotationSharedResource.fr-FR.resx`, etc.
 
 ## Error messages
 
@@ -200,45 +200,45 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 
 ## 3.0.0
 
-- Remove the need to call `IServiceCollection.AddForEvolveLocalization()` (see #27)
-- Rename `IMvcBuilder.AddForEvolveMvcLocalization()` to `IMvcBuilder.AddForEvolveLocalization()`
-- Refactor `ForEvolveLocalizationOptions` to leverage the Asp.Net Core options patterns
-- Use `Nerdbank.GitVersioning` to manage versions automagically.
-- Move builds from Azure DevOps to GitHub Actions
+-   Remove the need to call `IServiceCollection.AddForEvolveLocalization()` (see #27)
+-   Rename `IMvcBuilder.AddForEvolveMvcLocalization()` to `IMvcBuilder.AddForEvolveLocalization()`
+-   Refactor `ForEvolveLocalizationOptions` to leverage the Asp.Net Core options patterns
+-   Use `Nerdbank.GitVersioning` to manage versions automagically.
+-   Move builds from Azure DevOps to GitHub Actions
 
 ## 2.2.0
 
-- Add `Polish (pl)`
+-   Add `Polish (pl)`
 
 ## 2.1.0
 
-- Add `Chinese (zh)`
-- Add `Chinese (Traditional) (zh-Hant)`
-- Add `Chinese (Traditional, Taiwan) (zh-TW)`
+-   Add `Chinese (zh)`
+-   Add `Chinese (Traditional) (zh-Hant)`
+-   Add `Chinese (Traditional, Taiwan) (zh-TW)`
 
 ## 2.0.0
 
-- Update `MetadataProvider` so `DataTypeAttribute` gets the translation; Fix #21
-- Add functional tests that are covering most scenarios, related to error messages; closing #1
-- Add functional tests that are covering French translation; related to #5. This should ensure that further breaking changes in the Asp.Net Core repo would be detected automatically by the CI pipeline.
+-   Update `MetadataProvider` so `DataTypeAttribute` gets the translation; Fix #21
+-   Add functional tests that are covering most scenarios, related to error messages; closing #1
+-   Add functional tests that are covering French translation; related to #5. This should ensure that further breaking changes in the Asp.Net Core repo would be detected automatically by the CI pipeline.
 
 ### Possible/Known issues
 
-- User-specified `ErrorMessage` on `DataTypeAttribute` might (will most likely) get overridden by `ForEvolve.AspNetCore.Localization`.
+-   User-specified `ErrorMessage` on `DataTypeAttribute` might (will most likely) get overridden by `ForEvolve.AspNetCore.Localization`.
 
 ## 1.3.0
 
-- Add `Norwegian (bokmål) (nb)` and `Norwegian (bokmål) (no)`
+-   Add `Norwegian (bokmål) (nb)` and `Norwegian (bokmål) (no)`
 
 ## 1.2.0
 
-- Add `Spanish (es)`
+-   Add `Spanish (es)`
 
 ## 1.1.0
 
-- Add `Portuguese (pt)` and `Brazilian portuguese (pt-BR)`
+-   Add `Portuguese (pt)` and `Brazilian portuguese (pt-BR)`
 
 ## 1.0.0
 
-- Initial `French (fr)` and `English (en)`
-- Contributed `Hebrew (he)`
+-   Initial `French (fr)` and `English (en)`
+-   Contributed `Hebrew (he)`
