@@ -26,7 +26,6 @@ namespace WebPagesSample
             services
                 .AddForEvolveLocalization()
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddForEvolveMvcLocalization();
         }
 
