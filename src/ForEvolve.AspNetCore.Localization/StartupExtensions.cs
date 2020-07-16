@@ -4,6 +4,8 @@ using ForEvolve.AspNetCore.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization.Internal;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
@@ -17,19 +19,19 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public const string DefaultResourcesPath = "Resources";
 
-        private static ForEvolveLocalizationOptions Options { get; set; }
-        private static ILocalizationValidationMetadataProvider ValidationMetadataProvider { get; set; }
-
         /// <summary>
         /// Adds services required for application localization.
         /// The Asp.Net Core AddLocalization() method will be called.
         /// </summary>
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the services to.</param>
         /// <returns>The Microsoft.Extensions.DependencyInjection.IServiceCollection so that additional calls can be chained.</returns>
+        [Obsolete(@"You can delete the call to this extension method. 
+Use the IMvcBuilder.AddForEvolveMvcLocalization() extension method instead.
+
+This method will be removed in a future major release.")]
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services)
         {
-            return services
-                .AddForEvolveLocalization(options => { });
+            return services;
         }
 
         /// <summary>
@@ -39,7 +41,25 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the services to.</param>
         /// <param name="setupAction">An System.Action&lt;ForEvolveLocalizationOptions&gt; to configure the ForEvolve.AspNetCore.Localization.ForEvolveLocalizationOptions.</param>
         /// <returns>The Microsoft.Extensions.DependencyInjection.IServiceCollection so that additional calls can be chained.</returns>
+        [Obsolete(@"You can delete the call to this extension method. 
+Use the IMvcBuilder.AddForEvolveMvcLocalization() extension method instead.
+
+This method will be removed in a future major release.")]
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services, Action<ForEvolveLocalizationOptions> setupAction)
+        {
+
+            return services;
+        }
+
+        /// <summary>
+        /// Adds services required for application localization.
+        /// Calls the IServiceCollection.AddLocalization() method.
+        /// Registers an IMetadataDetailsProvider that handles validation attributes to Microsoft.AspNetCore.Mvc.MvcOptions.
+        /// Calls AddViewLocalization() and AddDataAnnotationsLocalization() on the IMvcBuilder (you can opt-out by configuring the options).
+        /// </summary>
+        /// <param name="mvcBuilder">The Microsoft.Extensions.DependencyInjection.IMvcBuilder.</param>
+        /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
+        public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
         {
             // Localization Options
             var supportedCultures = new List<CultureInfo>(new[]
@@ -70,7 +90,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 },
                 RequestLocalizationOptions = CreateDefaultRequestLocalizationOptions(defaultCulture, supportedCultures)
             };
-            setupAction(localizationOptions);
+            //setupAction(localizationOptions);
 
             // Create and configure the LocalizationValidationMetadataProvider
             var defaultValidationMetadataProvider = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationSharedResource>(
@@ -85,7 +105,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .ConfigureValidationMetadataProvider(defaultValidationMetadataProvider);
 
             // Regiter services
-            services
+            mvcBuilder.Services
                 .AddSingleton(localizationOptions)
                 //.AddSingleton<ILocalizationValidationMetadataProvider>(defaultValidationMetadataProvider)
                 .AddLocalization(options =>
@@ -93,36 +113,21 @@ namespace Microsoft.Extensions.DependencyInjection
                     options.ResourcesPath = localizationOptions.ResourcesPath;
                 });
 
-            // Keep global references
-            Options = localizationOptions;
-            ValidationMetadataProvider = defaultValidationMetadataProvider;
-
-            return services;
-        }
-
-        /// <summary>
-        /// Registers an IMetadataDetailsProvider that handles validation attributes to Microsoft.AspNetCore.Mvc.MvcOptions.
-        /// This also (on an opt-out basis) calls AddViewLocalization() and AddDataAnnotationsLocalization() on the IMvcBuilder.
-        /// </summary>
-        /// <param name="mvcBuilder">The Microsoft.Extensions.DependencyInjection.IMvcBuilder.</param>
-        /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
-        public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
-        {
             // Add the ValidationMetadataProvider to MVC
             mvcBuilder
                  .AddMvcOptions(options =>
                 {
-                    options.ModelMetadataDetailsProviders.Add(ValidationMetadataProvider);
+                    options.ModelMetadataDetailsProviders.Add(defaultValidationMetadataProvider);
                 });
 
             // Add the default ViewLocalization (opt-out basis)
-            if (Options.MvcOptions.EnableViewLocalization)
+            if (localizationOptions.MvcOptions.EnableViewLocalization)
             {
                 mvcBuilder.AddViewLocalization();
             }
 
             // Add the default DataAnnotationsLocalization (opt-out basis)
-            if (Options.MvcOptions.EnableDataAnnotationsLocalization)
+            if (localizationOptions.MvcOptions.EnableDataAnnotationsLocalization)
             {
                 mvcBuilder.AddDataAnnotationsLocalization();
             }

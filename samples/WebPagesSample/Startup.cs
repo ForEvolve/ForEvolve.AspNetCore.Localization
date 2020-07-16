@@ -24,10 +24,9 @@ namespace WebPagesSample
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddForEvolveLocalization()
 #if NET2
                 .AddMvc()
-#elif NET3 || NET5
+#else
                 .AddRazorPages()
 #endif
                 .AddForEvolveMvcLocalization()
