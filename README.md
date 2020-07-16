@@ -36,6 +36,7 @@ For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.
  - `Chinese (zh)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
  - `Chinese Traditional (zh-Hant)` thanks to [Jay Skyworker](https://github.com/jayskyworker) (Same as `zh-TW`, needs to be checked)
  - `Chinese Traditional, Taiwan (zh-TW)` thanks to [Jay Skyworker](https://github.com/jayskyworker)
+ - `Polish (pl)` thanks to [Denis Pujdak](https://github.com/fairking)
  
 ## Supported attributes
 
