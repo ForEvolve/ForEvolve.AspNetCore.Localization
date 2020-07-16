@@ -29,7 +29,7 @@ namespace WebPagesSample
 #else
                 .AddRazorPages()
 #endif
-                .AddForEvolveMvcLocalization()
+                .AddForEvolveLocalization()
             ;
         }
 

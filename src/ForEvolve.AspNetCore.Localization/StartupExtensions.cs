@@ -51,6 +51,11 @@ This method will be removed in a future major release.")]
             return services;
         }
 
+        [Obsolete("Call IMvcBuilder.AddForEvolveLocalization() instead; this method will be removed in a future major release.")]
+        public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
+        {
+            return AddForEvolveLocalization(mvcBuilder);
+        }
         /// <summary>
         /// Adds services required for application localization.
         /// Calls the IServiceCollection.AddLocalization() method.
@@ -59,7 +64,7 @@ This method will be removed in a future major release.")]
         /// </summary>
         /// <param name="mvcBuilder">The Microsoft.Extensions.DependencyInjection.IMvcBuilder.</param>
         /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
-        public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
+        public static IMvcBuilder AddForEvolveLocalization(this IMvcBuilder mvcBuilder)
         {
             // Localization Options
             var supportedCultures = new List<CultureInfo>(new[]
