@@ -27,9 +27,8 @@ namespace WebPagesSample
                 .AddForEvolveLocalization()
 #if NET2
                 .AddMvc()
-#elif NET3
+#elif NET3 || NET5
                 .AddRazorPages()
-#elif NET5
 #endif
                 .AddForEvolveMvcLocalization()
             ;
