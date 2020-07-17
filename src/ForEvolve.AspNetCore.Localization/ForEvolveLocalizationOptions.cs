@@ -6,8 +6,6 @@ namespace ForEvolve.AspNetCore.Localization
 {
     public class ForEvolveLocalizationOptions : LocalizationOptions
     {
-        public RequestLocalizationOptions RequestLocalizationOptions { get; set; }
-
         public bool EnableViewLocalization { get; set; }
         public bool EnableDataAnnotationsLocalization { get; set; }
         public Action<ILocalizationValidationMetadataProvider> ConfigureValidationMetadataProvider { get; set; }

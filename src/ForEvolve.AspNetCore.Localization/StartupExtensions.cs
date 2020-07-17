@@ -2,10 +2,9 @@
 using ForEvolve.AspNetCore.Localization.Adapters;
 using ForEvolve.AspNetCore.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -62,23 +61,14 @@ This method will be removed in a future major release.")]
         /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
         public static IMvcBuilder AddForEvolveLocalization(this IMvcBuilder mvcBuilder)
         {
+            // New registration
+            var services = mvcBuilder.Services;
+            services
+                .AddSingleton<IConfigureOptions<RequestLocalizationOptions>, RequestLocalizationOptionsInitializer>()
+                .AddSingleton<ISupportedCulturesCollection, SupportedCulturesCollection>()
+            ;
+
             // Localization Options
-            var supportedCultures = new List<CultureInfo>(new[]
-            {
-                new CultureInfo("en"),
-                new CultureInfo("fr"),
-                new CultureInfo("he"),
-                new CultureInfo("pt"),
-                new CultureInfo("pt-BR"),
-                new CultureInfo("es"),
-                new CultureInfo("no"),
-                new CultureInfo("nb"),
-                new CultureInfo("zh"),
-                new CultureInfo("zh-Hant"),
-                new CultureInfo("zh-TW"),
-                new CultureInfo("pl"),
-            });
-            var defaultCulture = supportedCultures.First();
             var localizationOptions = new ForEvolveLocalizationOptions
             {
                 ResourcesPath = DefaultResourcesPath,
@@ -86,9 +76,7 @@ This method will be removed in a future major release.")]
                 EnableViewLocalization = true,
                 ConfigureValidationMetadataProvider = provider => { },
                 DefaultAdapterOptions = new ForEvolveMvcDefaultLocalizationAdapterOptions(),
-                RequestLocalizationOptions = CreateDefaultRequestLocalizationOptions(defaultCulture, supportedCultures)
             };
-            //setupAction(localizationOptions);
 
             // Create and configure the LocalizationValidationMetadataProvider
             var defaultValidationMetadataProvider = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationSharedResource>(
@@ -146,39 +134,8 @@ This method will be removed in a future major release.")]
             {
                 throw new NullReferenceException($"{nameof(ForEvolveLocalizationOptions)} was not found. Please make sure that `services.AddForEvolveLocalization()` has been called in the `ConfigureServices(IServiceCollection services)` method.");
             }
-            app.UseRequestLocalization(locOptions.RequestLocalizationOptions);
+            app.UseRequestLocalization();
             return app;
-        }
-
-        private static RequestLocalizationOptions CreateDefaultRequestLocalizationOptions(CultureInfo defaultCulture, IList<CultureInfo> supportedCultures)
-        {
-            var requestLocalizationOptions = new RequestLocalizationOptions
-            {
-                // State what the default culture for your application is. This will be used if no specific culture
-                // can be determined for a given request.
-                DefaultRequestCulture = new RequestCulture(defaultCulture, defaultCulture),
-
-                // You must explicitly state which cultures your application supports.
-                // These are the cultures the app supports for formatting numbers, dates, etc.
-                SupportedCultures = supportedCultures,
-
-                // These are the cultures the app supports for UI strings, i.e. we have localized resources for.
-                SupportedUICultures = supportedCultures
-            };
-
-            // You can change which providers are configured to determine the culture for requests, or even add a custom
-            // provider with your own logic. The providers will be asked in order to provide a culture for each request,
-            // and the first to provide a non-null result that is in the configured supported cultures list will be used.
-            // By default, the following built-in providers are configured:
-            // - QueryStringRequestCultureProvider, sets culture via "culture" and "ui-culture" query string values, useful for testing
-            // - CookieRequestCultureProvider, sets culture via "ASPNET_CULTURE" cookie
-            // - AcceptLanguageHeaderRequestCultureProvider, sets culture via the "Accept-Language" request header
-            //requestLocalizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context =>
-            //{
-            //  // My custom request culture logic
-            //  return new ProviderCultureResult("en");
-            //}));
-            return requestLocalizationOptions;
         }
     }
 }
