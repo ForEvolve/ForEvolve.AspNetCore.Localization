@@ -1,19 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Localization;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
 namespace ForEvolve.AspNetCore.Localization
 {
     public class ForEvolveLocalizationOptions : LocalizationOptions
     {
-        public ForEvolveMvcLocalizationOptions MvcOptions { get; set; }
-
-        //public IList<CultureInfo> SupportedCultures { get; set; }
-        //public CultureInfo DefaultCulture { get; set; }
         public RequestLocalizationOptions RequestLocalizationOptions { get; set; }
+
+        public bool EnableViewLocalization { get; set; }
+        public bool EnableDataAnnotationsLocalization { get; set; }
+        public Action<ILocalizationValidationMetadataProvider> ConfigureValidationMetadataProvider { get; set; }
+        public ForEvolveMvcDefaultLocalizationAdapterOptions DefaultAdapterOptions { get; set; }
     }
 }

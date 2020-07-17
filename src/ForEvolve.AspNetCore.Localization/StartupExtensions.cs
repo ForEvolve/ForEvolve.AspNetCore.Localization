@@ -3,15 +3,10 @@ using ForEvolve.AspNetCore.Localization.Adapters;
 using ForEvolve.AspNetCore.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Localization.Internal;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -56,6 +51,7 @@ This method will be removed in a future major release.")]
         {
             return AddForEvolveLocalization(mvcBuilder);
         }
+
         /// <summary>
         /// Adds services required for application localization.
         /// Calls the IServiceCollection.AddLocalization() method.
@@ -86,13 +82,10 @@ This method will be removed in a future major release.")]
             var localizationOptions = new ForEvolveLocalizationOptions
             {
                 ResourcesPath = DefaultResourcesPath,
-                MvcOptions = new ForEvolveMvcLocalizationOptions
-                {
-                    EnableDataAnnotationsLocalization = true,
-                    EnableViewLocalization = true,
-                    ConfigureValidationMetadataProvider = provider => { },
-                    DefaultAdapterOptions = new ForEvolveMvcDefaultLocalizationAdapterOptions()
-                },
+                EnableDataAnnotationsLocalization = true,
+                EnableViewLocalization = true,
+                ConfigureValidationMetadataProvider = provider => { },
+                DefaultAdapterOptions = new ForEvolveMvcDefaultLocalizationAdapterOptions(),
                 RequestLocalizationOptions = CreateDefaultRequestLocalizationOptions(defaultCulture, supportedCultures)
             };
             //setupAction(localizationOptions);
@@ -104,9 +97,9 @@ This method will be removed in a future major release.")]
                 new StringLengthLocalizationValidationAttributeAdapter(),
 
                 // Keep this one last
-                new DefaultLocalizationValidationAttributeAdapter(localizationOptions.MvcOptions.DefaultAdapterOptions)
+                new DefaultLocalizationValidationAttributeAdapter(localizationOptions.DefaultAdapterOptions)
             );
-            localizationOptions.MvcOptions
+            localizationOptions
                 .ConfigureValidationMetadataProvider(defaultValidationMetadataProvider);
 
             // Regiter services
@@ -126,13 +119,13 @@ This method will be removed in a future major release.")]
                 });
 
             // Add the default ViewLocalization (opt-out basis)
-            if (localizationOptions.MvcOptions.EnableViewLocalization)
+            if (localizationOptions.EnableViewLocalization)
             {
                 mvcBuilder.AddViewLocalization();
             }
 
             // Add the default DataAnnotationsLocalization (opt-out basis)
-            if (localizationOptions.MvcOptions.EnableDataAnnotationsLocalization)
+            if (localizationOptions.EnableDataAnnotationsLocalization)
             {
                 mvcBuilder.AddDataAnnotationsLocalization();
             }
