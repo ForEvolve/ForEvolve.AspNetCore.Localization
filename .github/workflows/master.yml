@@ -22,26 +22,29 @@ jobs:
 
         steps:
             - uses: actions/checkout@v1
+            - name: Setup .NET Core
+                uses: coderpatros/setup-dotnet@sxs
+                with:
+                    dotnet-version: ${{ env.DOTNET_2_VERSION }},${{ env.DOTNET_3_VERSION }},${{ env.DOTNET_5_VERSION }}
+            # - name: Setup .NET Core ${{ env.DOTNET_2_VERSION }}
+            #   uses: actions/setup-dotnet@v1
+            #   with:
+            #       dotnet-version: ${{ env.DOTNET_2_VERSION }}
 
-            - name: Setup .NET Core ${{ env.DOTNET_2_VERSION }}
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_2_VERSION }}
+            # - name: Setup .NET Core ${{ env.DOTNET_3_VERSION }}
+            #   uses: actions/setup-dotnet@v1
+            #   with:
+            #       dotnet-version: ${{ env.DOTNET_3_VERSION }}
 
-            - name: Setup .NET Core ${{ env.DOTNET_3_VERSION }}
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_3_VERSION }}
+            # - name: Setup .NET Core ${{ env.DOTNET_5_VERSION }}
+            #   uses: actions/setup-dotnet@v1
+            #   with:
+            #       dotnet-version: ${{ env.DOTNET_5_VERSION }}
 
-            - name: Setup .NET Core ${{ env.DOTNET_5_VERSION }}
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_5_VERSION }}
-
-            - name: Setup side by side .NET SDKs on *nix
-              if: matrix.os != 'windows-latest'
-              run: |
-                  rsync -a ${DOTNET_ROOT/${{ env.DOTNET_5_VERSION }}/${{ env.DOTNET_3_VERSION }}/${{ env.DOTNET_2_VERSION }}}/* $DOTNET_ROOT/
+            # - name: Setup side by side .NET SDKs on *nix
+            #   if: matrix.os != 'windows-latest'
+            #   run: |
+            #       rsync -a ${DOTNET_ROOT/${{ env.DOTNET_5_VERSION }}/${{ env.DOTNET_3_VERSION }}/${{ env.DOTNET_2_VERSION }}}/* $DOTNET_ROOT/
 
             - name: Build
               run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
