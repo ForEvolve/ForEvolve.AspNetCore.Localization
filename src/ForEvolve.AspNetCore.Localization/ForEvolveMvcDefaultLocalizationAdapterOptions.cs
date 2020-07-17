@@ -7,7 +7,7 @@ namespace ForEvolve.AspNetCore.Localization
 {
     public class ForEvolveMvcDefaultLocalizationAdapterOptions
     {
-        private static string[] InternalDefaultSupportedAttributes = new string[]
+        private static string[] _internalDefaultSupportedAttributes = new string[]
         {
             nameof(CompareAttribute),
             nameof(EmailAddressAttribute),
@@ -25,7 +25,7 @@ namespace ForEvolve.AspNetCore.Localization
         public IList<string> SupportedAttributes { get; }
 
         public ForEvolveMvcDefaultLocalizationAdapterOptions()
-            : this(InternalDefaultSupportedAttributes)
+            : this(_internalDefaultSupportedAttributes)
         {
         }
 
@@ -35,6 +35,6 @@ namespace ForEvolve.AspNetCore.Localization
             SupportedAttributes = new List<string>(supportedAttributes);
         }
 
-        public IReadOnlyCollection<string> DefaultSupportedAttributes => new ReadOnlyCollection<string>(InternalDefaultSupportedAttributes);
+        public IReadOnlyCollection<string> DefaultSupportedAttributes => new ReadOnlyCollection<string>(_internalDefaultSupportedAttributes);
     }
 }
