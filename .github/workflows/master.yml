@@ -22,10 +22,11 @@ jobs:
 
         steps:
             - uses: actions/checkout@v1
+
             - name: Setup .NET Core
-                uses: coderpatros/setup-dotnet@sxs
-                with:
-                    dotnet-version: ${{ env.DOTNET_2_VERSION }},${{ env.DOTNET_3_VERSION }},${{ env.DOTNET_5_VERSION }}
+              uses: coderpatros/setup-dotnet@sxs
+              with:
+                  dotnet-version: ${{ env.DOTNET_2_VERSION }},${{ env.DOTNET_3_VERSION }},${{ env.DOTNET_5_VERSION }}
             # - name: Setup .NET Core ${{ env.DOTNET_2_VERSION }}
             #   uses: actions/setup-dotnet@v1
             #   with:
