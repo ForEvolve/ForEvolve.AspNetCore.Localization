@@ -1,12 +1,18 @@
 # ForEvolve.AspNetCore.Localization
 
-[![VSTS Build status](https://forevolve.visualstudio.com/ForEvolve-Framework/_apis/build/status/ForEvolve.AspNetCore.Localization)](https://forevolve.visualstudio.com/ForEvolve-Framework/_build/latest?definitionId=37)
+![Build, Test, and Deploy](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/workflows/Build,%20Test,%20and%20Deploy/badge.svg)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%2Flocalization%2Fshield%2FForEvolve.AspNetCore.Localization%2Flatest&label=ForEvolve.AspNetCore.Localization)](https://f.feedz.io/forevolve/localization/packages/ForEvolve.AspNetCore.Localization/latest/download)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore.Localization)](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/)
 
-The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.0 applications in a few line of code.
+The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in 2 lines of code.
 
 This is very useful for `ValidationAttributes` like `[Required]`. No need to specify any string or error message, `ForEvolve.AspNetCore.Localization` do it for you.
 
-## NuGet
+## Versioning
+
+The packages follows _semantic versioning_. I use `Nerdbank.GitVersioning` to automatically version packages based on git commits/hashes.
+
+## NuGet (Release)
 
 You can:
 
@@ -22,9 +28,9 @@ dotnet add package ForEvolve.AspNetCore.Localization
 
 or take a look at [https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/).
 
-## Prerelease MyGet
+## Prerelease/CI builds
 
-For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
+All packages are pushed to [feedz.io](feedz.io), including PR builds, thanks to their "Open Source" subscription.
 
 ## Supported languages:
 
