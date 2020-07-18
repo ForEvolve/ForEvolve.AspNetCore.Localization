@@ -4,33 +4,7 @@
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%2Flocalization%2Fshield%2FForEvolve.AspNetCore.Localization%2Flatest&label=ForEvolve.AspNetCore.Localization)](https://f.feedz.io/forevolve/localization/packages/ForEvolve.AspNetCore.Localization/latest/download)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore.Localization)](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/)
 
-The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in one line of code.
-
-This is very useful for `ValidationAttributes` like `[Required]`. No need to specify any string or error message, `ForEvolve.AspNetCore.Localization` do it for you.
-
-## Versioning
-
-The packages follows _semantic versioning_. I use `Nerdbank.GitVersioning` to automatically version packages based on git commits/hashes.
-
-## NuGet (Release)
-
-You can:
-
-```cmd
-Install-Package ForEvolve.AspNetCore.Localization
-```
-
-or
-
-```cmd
-dotnet add package ForEvolve.AspNetCore.Localization
-```
-
-or take a look at [https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/).
-
-## Prerelease/CI builds
-
-All packages are pushed to [feedz.io](feedz.io), including PR builds, thanks to their "Open Source" subscription.
+The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in one line of code. Moreover, it translates `System.ComponentModel.DataAnnotations.ValidationAttribute`s automagically, without the need to specify any string or error message (like the `[Required]` attribute).
 
 ## Supported languages:
 
@@ -64,13 +38,39 @@ All packages are pushed to [feedz.io](feedz.io), including PR builds, thanks to 
 
 You can also create and register your own adapters and attributes like normal.
 
+## Versioning
+
+The packages follows _semantic versioning_ and uses [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) to automatically version packages based on git commits/hashes.
+
+## NuGet (Release)
+
+You can:
+
+```cmd
+Install-Package ForEvolve.AspNetCore.Localization
+```
+
+or
+
+```cmd
+dotnet add package ForEvolve.AspNetCore.Localization
+```
+
+or take a look at [https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/).
+
+## CI builds
+
+PR builds are pushed to [feedz.io](feedz.io) before getting released to NuGet, thanks to their Open Source subscription.
+
+The NuGet v3 URL is: https://f.feedz.io/forevolve/localization/nuget/index.json
+
 ## How to use
 
 To enable localization for everything, including data annotation, you need to:
 
-1. Make sure your application is targeting `Asp.Net Core 2.1+`
-1. Add `ForEvolve.AspNetCore.Localization` NuGet package to your project (`dotnet add package ForEvolve.AspNetCore.Localization`).
-1. In `Startup.cs` add and configure dependencies (see below).
+1. Add the `ForEvolve.AspNetCore.Localization` NuGet package to your project.
+1. In `Startup.cs`, `AddForEvolveLocalization()` and optionally `UseRequestLocalization()` (see below).
+1. Run your application
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -88,7 +88,7 @@ public void ConfigureServices(IServiceCollection services)
     ;
 }
 
-public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+public void Configure(IApplicationBuilder app)
 {
     // (optional)
     // Adds the Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware to automatically
@@ -101,12 +101,32 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 As you can see, it took only one line of code to enable localization, and another line to automatically set the culture information for requests using `RequestLocalizationMiddleware`.
 
-`IMvcBuilder.AddForEvolveLocalization();` adds all necessary services to the DI container, including supported resources, resource path, etc. This also calls `services.AddLocalization(...)` for you, defining a default `ResourcesPath` to `"Resources"`. It also registers the `ILocalizationValidationMetadataProvider` (this does the validation attribute localization magic) as well as `AddViewLocalization()` and `AddDataAnnotationsLocalization()`.
+`IMvcBuilder.AddForEvolveLocalization();` adds all necessary services to the DI container. It calls `IServiceCollection.AddLocalization(...)`, set the default `ResourcesPath` to `"Resources"`, registers the `ILocalizationValidationMetadataProvider` (which does the validation attributes localization magic), and calls both `IMvcBuilder.AddViewLocalization()` and `IMvcBuilder.AddDataAnnotationsLocalization()`.
 
-### Options
+If you don't want `IMvcBuilder.AddViewLocalization()` or `IMvcBuilder.AddDataAnnotationsLocalization()` to be called, you can opt-out by using an overload of `IMvcBuilderAddForEvolveLocalization()`, like that:
 
-If you want to change any Asp.Net-related options, you can Configure them or implements `IConfigureOptions<TOptions>` classes as you would do normally.
-In 3.0 all options has been removed, so no need to learn how the library work, you must use Asp.Net options directly.
+```csharp
+services
+    .AddRazorPages() // or other part of MVC that returns an IMvcBuilder
+    .AddForEvolveLocalization(
+        enableViewLocalization: false,
+        enableDataAnnotationsLocalization: false
+    )
+;
+```
+
+### Migrating to 3.0
+
+If you want to change any Asp.Net-related options, you can Configure them or implements `IConfigureOptions<TOptions>` classes as you would normally do.
+In 3.0 all options has been removed, so no need to learn how the library work, you must use Asp.Net options directly. See the [Change log](#change-log) for more info.
+
+If you built custom `ILocalizationValidationAttributeAdapter`, just register them with the DI container, like:
+
+```csharp
+services.AddSingleton<ILocalizationValidationAttributeAdapter, MyAdapter>()
+```
+
+For any other use-case that I may have forgotten, please open an issue.
 
 ## How to contribute a translation
 
@@ -151,11 +171,11 @@ Error messages source (if you want the original error messages): [corefx/src/Sys
 
 ## The history of the project
 
-I created this project because I did not want to code something similar to this every single time I start a new Asp.Net Core application. I did not want to write an error message on every ValidationAttribute either (which seems to be the official solution).
+I created this project because I did not want to code something similar to this every single time I start a new Asp.Net Core application. I did not want to write an error message on every `ValidationAttribute` either (which seems to be the official solution).
 
 To be honest, I was a little disappointed to see how hard it is to localize Asp.Net Core validation attributes. This should be trivial.
 
-_I don't want to criticize the design made by the team that built that without knowing, so I will assume there are some good reasons behind these design choices (technical or not)._
+_Don't get me wrong here; I don't want to criticize the design made by the team that built that system. I can only assume that there are some good reasons behind these design choices (technical or not)._
 
 That said, the other parts of the localization pipeline of Asp.Net Core are pretty neat with `IStringLocalizer`, `IHtmlLocalizer` and `IViewLocalizer`.
 
@@ -180,7 +200,8 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 -   Internally leveraging DI more to simplify the initialization process (no more `new`ing volatile dependencies).
 -   `IApplicationBuilder.UseForEvolveRequestLocalization()` is now obsolete, use `IApplicationBuilder.UseRequestLocalization()` instead.
 -   Use `Nerdbank.GitVersioning` to manage versions automagically.
--   Move builds from Azure DevOps to GitHub Actions
+-   Move builds from Azure DevOps to GitHub Actions so PR can be made to the CI/CD pipeline.
+-   You can now use `ISupportedCulturesCollection` to access the list of supported `CultureInfo`.
 
 ## 2.2.0
 

@@ -13,6 +13,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Description>The ForEvolve.AspNetCore.Localization package allows you to enable localization of Asp.Net Core 2.1+ applications in one line of code. Moreover, it translates `System.ComponentModel.DataAnnotations.ValidationAttribute`s automagically, without the need to specify any string or error message (like the `[Required]` attribute).</Description>
   </PropertyGroup>
 
   <ItemGroup>
