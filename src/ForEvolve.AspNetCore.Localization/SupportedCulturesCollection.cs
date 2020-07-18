@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore.Localization
 {
-    public interface ISupportedCulturesCollection : IReadOnlyList<CultureInfo>
-    {
-    }
-
     public class SupportedCulturesCollection : ISupportedCulturesCollection
     {
         private readonly ImmutableList<CultureInfo> _supportedCultures = new[]

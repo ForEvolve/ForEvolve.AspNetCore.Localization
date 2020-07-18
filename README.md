@@ -4,7 +4,7 @@
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%2Flocalization%2Fshield%2FForEvolve.AspNetCore.Localization%2Flatest&label=ForEvolve.AspNetCore.Localization)](https://f.feedz.io/forevolve/localization/packages/ForEvolve.AspNetCore.Localization/latest/download)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore.Localization)](https://www.nuget.org/packages/ForEvolve.AspNetCore.Localization/)
 
-The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in 2 lines of code.
+The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in one line of code.
 
 This is very useful for `ValidationAttributes` like `[Required]`. No need to specify any string or error message, `ForEvolve.AspNetCore.Localization` do it for you.
 
@@ -62,9 +62,7 @@ All packages are pushed to [feedz.io](feedz.io), including PR builds, thanks to 
 -   UrlAttribute
 -   StringLengthAttribute (see [StringLengthLocalizationValidationAttributeAdapter.cs](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/src/ForEvolve.AspNetCore.Localization/Adapters/StringLengthLocalizationValidationAttributeAdapter.cs))
 
-See [ForEvolveMvcDefaultLocalizationAdapterOptions.cs](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization/blob/master/src/ForEvolve.AspNetCore.Localization/ForEvolveMvcDefaultLocalizationAdapterOptions.cs) for the list of supported attributes used by the `DefaultLocalizationValidationAttributeAdapter`.
-
-You can also create and register your own adapters and attributes.
+You can also create and register your own adapters and attributes like normal.
 
 ## How to use
 
@@ -80,65 +78,35 @@ public void ConfigureServices(IServiceCollection services)
     // MVC (2.1)
     services
         .AddMvc()
-        .AddForEvolveLocalization();
+        .AddForEvolveLocalization()
+    ;
 
     // MVC (3+)
     services
         .AddRazorPages() // or other part of MVC that returns an IMvcBuilder
-        .AddForEvolveLocalization();
+        .AddForEvolveLocalization()
+    ;
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
-    // Localization
-    app.UseForEvolveRequestLocalization();
+    // (optional)
+    // Adds the Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware to automatically
+    // set culture information for requests based on information provided by the client.
+    app.UseRequestLocalization();
 
     //...
 }
 ```
 
-As you can see, it took only 2 lines of code to enable localization.
+As you can see, it took only one line of code to enable localization, and another line to automatically set the culture information for requests using `RequestLocalizationMiddleware`.
 
 `IMvcBuilder.AddForEvolveLocalization();` adds all necessary services to the DI container, including supported resources, resource path, etc. This also calls `services.AddLocalization(...)` for you, defining a default `ResourcesPath` to `"Resources"`. It also registers the `ILocalizationValidationMetadataProvider` (this does the validation attribute localization magic) as well as `AddViewLocalization()` and `AddDataAnnotationsLocalization()`.
 
-The `IApplicationBuilder.UseForEvolveRequestLocalization()` extension method calls `app.UseRequestLocalization()` with some options.
-
 ### Options
 
-You can configure the default values through `ForEvolveLocalizationOptions`. To make it easy to use, everything is configurable at that single place.
-
----
-
-# TODO UPDATE OPTIONS EXAMPLES
-
-**Example 1:**
-
-```csharp
-services
-    .AddForEvolveLocalization(options => {
-        options.ResourcesPath = "new/place/where/to/store/resources";
-    });
-```
-
-**Example 2:**
-
-```csharp
-services
-    .AddForEvolveLocalization(options => {
-        options.ResourcesPath = "new/place/where/to/store/resources";
-        options.MvcOptions.EnableViewLocalization = false;
-        options.MvcOptions.ConfigureValidationMetadataProvider = (provider) =>
-        {
-            provider.Adapters.Add(new SomeCoolAdapterThatICreatedOnlyForMyProject());
-        };
-    });
-```
-
-You can opt-out by setting `options.MvcOptions.EnableViewLocalization` or `options.MvcOptions.EnableDataAnnotationsLocalization` to `false` (in the call to `services.AddForEvolveLocalization();`).
-
-# END TODO UPDATE OPTIONS EXAMPLES
-
----
+If you want to change any Asp.Net-related options, you can Configure them or implements `IConfigureOptions<TOptions>` classes as you would do normally.
+In 3.0 all options has been removed, so no need to learn how the library work, you must use Asp.Net options directly.
 
 ## How to contribute a translation
 
@@ -153,7 +121,7 @@ I built a small tool to help find the culture-neutral and culture-specifics `Cul
 1. Fork the repo
 1. Create a resource file for the language you want to translate error messages into.
 1. Translate it (obviously)
-1. Add the new language to the `supportedCultures` list in `StartupExtensions.cs`.
+1. Add the new language to the `_supportedCultures` array in `SupportedCulturesCollection.cs`.
 1. Add the new language to the `Supported languages` section of the `README.md` file with a "thanks to you" attribution and a link.
 1. Open a pull request
 
@@ -208,10 +176,9 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 
 -   Remove the need to call `IServiceCollection.AddForEvolveLocalization()` (see #27)
 -   Rename `IMvcBuilder.AddForEvolveMvcLocalization()` to `IMvcBuilder.AddForEvolveLocalization()`
--   Leverage the options patterns to configure Asp.Net instead of custom options.
-    -   `ForEvolveLocalizationOptions` and `ForEvolveMvcDefaultLocalizationAdapterOptions` has been deleted
+-   Leverage the options patterns to configure Asp.Net instead of custom options. Due to that, `ForEvolveLocalizationOptions` and `ForEvolveMvcDefaultLocalizationAdapterOptions` has been deleted.
+-   Internally leveraging DI more to simplify the initialization process (no more `new`ing volatile dependencies).
 -   `IApplicationBuilder.UseForEvolveRequestLocalization()` is now obsolete, use `IApplicationBuilder.UseRequestLocalization()` instead.
--   Add property `SupportedAttributes` to `ILocalizationValidationAttributeAdapter`
 -   Use `Nerdbank.GitVersioning` to manage versions automagically.
 -   Move builds from Azure DevOps to GitHub Actions
 

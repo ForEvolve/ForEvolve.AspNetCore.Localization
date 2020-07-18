@@ -10,7 +10,7 @@ namespace ForEvolve.AspNetCore.Localization.Adapters
 {
     public class DefaultLocalizationValidationAttributeAdapter : ILocalizationValidationAttributeAdapter
     {
-        public IList<string> SupportedAttributes { get; } = new List<string>(new string[]
+        private readonly string[] _supportedAttributes = new string[]
         {
             nameof(CompareAttribute),
             nameof(EmailAddressAttribute),
@@ -23,11 +23,11 @@ namespace ForEvolve.AspNetCore.Localization.Adapters
             nameof(RangeAttribute),
             nameof(RegularExpressionAttribute),
             nameof(UrlAttribute)
-        });
+        };
 
         public bool CanHandle(ValidationAttribute attribute)
         {
-            return SupportedAttributes.Contains(attribute.GetType().Name);
+            return _supportedAttributes.Contains(attribute.GetType().Name);
         }
 
         public string GetErrorMessageResourceName(ValidationAttribute attribute)
