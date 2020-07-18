@@ -34,8 +34,8 @@ All packages are pushed to [feedz.io](feedz.io), including PR builds, thanks to 
 
 ## Supported languages:
 
--   `English (en)`
--   `French (fr)`
+-   `English (en)` original error messages modified by [Carl-Hugo Marcotte](https://github.com/Carl-Hugo)
+-   `French (fr)` original translation by [Carl-Hugo Marcotte](https://github.com/Carl-Hugo)
 -   `Hebrew (he)` thanks to [aboyaniv](https://github.com/aboyaniv)
 -   `Portuguese (pt)` thanks to [Matheus Avi](https://github.com/spyker0) (Same as `pt-BR`, needs to be checked)
 -   `Brazilian portuguese (pt-BR)` thanks to [Matheus Avi](https://github.com/spyker0)
