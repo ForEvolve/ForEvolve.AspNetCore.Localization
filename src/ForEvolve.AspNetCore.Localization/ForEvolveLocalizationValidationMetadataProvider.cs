@@ -11,7 +11,7 @@ namespace ForEvolve.AspNetCore.Localization
         public Type ErrorMessageResourceType { get; }
         public IList<ILocalizationValidationAttributeAdapter> Adapters { get; }
 
-        public ForEvolveLocalizationValidationMetadataProvider(params ILocalizationValidationAttributeAdapter[] adapters)
+        public ForEvolveLocalizationValidationMetadataProvider(IEnumerable<ILocalizationValidationAttributeAdapter> adapters)
         {
             Adapters = new List<ILocalizationValidationAttributeAdapter>(adapters ?? Enumerable.Empty<ILocalizationValidationAttributeAdapter>());
             ErrorMessageResourceType = typeof(TErrorMessageResource);

@@ -2,6 +2,8 @@
 using ForEvolve.AspNetCore.Localization.Adapters;
 using ForEvolve.AspNetCore.Localization.Resources;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -11,8 +13,6 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ForEvolveLocalizationStartupExtensions
     {
-        public const string DefaultResourcesPath = "Resources";
-
         /// <summary>
         /// Adds services required for application localization.
         /// The Asp.Net Core AddLocalization() method will be called.
@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
         [Obsolete(@"You can delete the call to this extension method. 
 Use the IMvcBuilder.AddForEvolveMvcLocalization() extension method instead.
 
-This method will be removed in a future major release.")]
+This method will be removed in a future major release.", error: false)]
         public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services)
         {
             return services;
@@ -37,15 +37,15 @@ This method will be removed in a future major release.")]
         /// <returns>The Microsoft.Extensions.DependencyInjection.IServiceCollection so that additional calls can be chained.</returns>
         [Obsolete(@"You can delete the call to this extension method. 
 Use the IMvcBuilder.AddForEvolveMvcLocalization() extension method instead.
+The ForEvolveLocalizationOptions class has also been removed.
 
-This method will be removed in a future major release.")]
-        public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services, Action<ForEvolveLocalizationOptions> setupAction)
+This method will be removed in a future major release.", error: true)]
+        public static IServiceCollection AddForEvolveLocalization(this IServiceCollection services, Action<object> setupAction)
         {
-
             return services;
         }
 
-        [Obsolete("Call IMvcBuilder.AddForEvolveLocalization() instead; this method will be removed in a future major release.")]
+        [Obsolete("Call IMvcBuilder.AddForEvolveLocalization() instead; this method will be removed in a future major release.", error: false)]
         public static IMvcBuilder AddForEvolveMvcLocalization(this IMvcBuilder mvcBuilder)
         {
             return AddForEvolveLocalization(mvcBuilder);
@@ -61,62 +61,44 @@ This method will be removed in a future major release.")]
         /// <returns>The Microsoft.Extensions.DependencyInjection.IMvcBuilder so that additional calls can be chained.</returns>
         public static IMvcBuilder AddForEvolveLocalization(this IMvcBuilder mvcBuilder)
         {
+            return AddForEvolveLocalization(
+                mvcBuilder,
+                enableViewLocalization: true,
+                enableDataAnnotationsLocalization: true
+            );
+        }
+
+        /// <summary>
+        /// Adds services required for application localization.
+        /// Calls the IServiceCollection.AddLocalization() method.
+        /// Registers an IMetadataDetailsProvider that handles validation attributes to Microsoft.AspNetCore.Mvc.MvcOptions.
+        /// </summary>
+        /// <param name="mvcBuilder">The Microsoft.Extensions.DependencyInjection.IMvcBuilder.</param>
+        /// <param name="enableDataAnnotationsLocalization"><c>true</c> to call <see cref="MvcLocalizationMvcBuilderExtensions.AddViewLocalization"/> on <paramref name="mvcBuilder"/>, otherwise false.</param>
+        /// <param name="enableViewLocalization"><c>true</c> to call <see cref="MvcDataAnnotationsMvcBuilderExtensions.AddDataAnnotationsLocalization"/> on <paramref name="mvcBuilder"/>, otherwise false.</param>
+        /// <returns>The <see cref="IMvcBuilder"/> so that additional calls can be chained.</returns>
+        public static IMvcBuilder AddForEvolveLocalization(this IMvcBuilder mvcBuilder, bool enableViewLocalization, bool enableDataAnnotationsLocalization)
+        {
             // New registration
             var services = mvcBuilder.Services;
             services
-                .AddSingleton<IConfigureOptions<RequestLocalizationOptions>, RequestLocalizationOptionsInitializer>()
+                // Configure ForEvolve.AspNetCore.Localization
                 .AddSingleton<ISupportedCulturesCollection, SupportedCulturesCollection>()
+                .AddSingleton<ILocalizationValidationMetadataProvider, ForEvolveLocalizationValidationMetadataProvider<DataAnnotationSharedResource>>()
+                .AddSingleton<ILocalizationValidationAttributeAdapter, StringLengthLocalizationValidationAttributeAdapter>()
+                .AddSingleton<ILocalizationValidationAttributeAdapter, DefaultLocalizationValidationAttributeAdapter>()
+
+                // Add custom options initializers to configures Asp.Net Core
+                .AddSingleton<IConfigureOptions<RequestLocalizationOptions>, RequestLocalizationOptionsInitializer>()
+                .AddSingleton<IConfigureOptions<LocalizationOptions>, LocalizationOptionsInitializer>()
+                .AddSingleton<IConfigureOptions<MvcOptions>, MvcOptionsInitializer>()
+
+                // Adds services required for application localization.
+                .AddLocalization()
             ;
 
-            // Localization Options
-            var localizationOptions = new ForEvolveLocalizationOptions
-            {
-                ResourcesPath = DefaultResourcesPath,
-                EnableDataAnnotationsLocalization = true,
-                EnableViewLocalization = true,
-                ConfigureValidationMetadataProvider = provider => { },
-                DefaultAdapterOptions = new ForEvolveMvcDefaultLocalizationAdapterOptions(),
-            };
-
-            // Create and configure the LocalizationValidationMetadataProvider
-            var defaultValidationMetadataProvider = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationSharedResource>(
-                // Custom multi-messages adapter that duplicate the attribute logic
-                // A better solution is welcome :)
-                new StringLengthLocalizationValidationAttributeAdapter(),
-
-                // Keep this one last
-                new DefaultLocalizationValidationAttributeAdapter(localizationOptions.DefaultAdapterOptions)
-            );
-            localizationOptions
-                .ConfigureValidationMetadataProvider(defaultValidationMetadataProvider);
-
-            // Regiter services
-            mvcBuilder.Services
-                .AddSingleton(localizationOptions)
-                //.AddSingleton<ILocalizationValidationMetadataProvider>(defaultValidationMetadataProvider)
-                .AddLocalization(options =>
-                {
-                    options.ResourcesPath = localizationOptions.ResourcesPath;
-                });
-
-            // Add the ValidationMetadataProvider to MVC
-            mvcBuilder
-                 .AddMvcOptions(options =>
-                {
-                    options.ModelMetadataDetailsProviders.Add(defaultValidationMetadataProvider);
-                });
-
-            // Add the default ViewLocalization (opt-out basis)
-            if (localizationOptions.EnableViewLocalization)
-            {
-                mvcBuilder.AddViewLocalization();
-            }
-
-            // Add the default DataAnnotationsLocalization (opt-out basis)
-            if (localizationOptions.EnableDataAnnotationsLocalization)
-            {
-                mvcBuilder.AddDataAnnotationsLocalization();
-            }
+            if (enableViewLocalization) { mvcBuilder.AddViewLocalization(); }
+            if (enableDataAnnotationsLocalization) { mvcBuilder.AddDataAnnotationsLocalization(); }
 
             return mvcBuilder;
         }
@@ -127,15 +109,10 @@ This method will be removed in a future major release.")]
         /// </summary>
         /// <param name="app">The Microsoft.AspNetCore.Builder.IApplicationBuilder.</param>
         /// <returns>The Microsoft.AspNetCore.Builder.IApplicationBuilder so that additional calls can be chained..</returns>
+        [Obsolete("Call the IApplicationBuilder.UseRequestLocalization() extension method instead. This will be deleted in a next major version.", error: false)]
         public static IApplicationBuilder UseForEvolveRequestLocalization(this IApplicationBuilder app)
         {
-            var locOptions = app.ApplicationServices.GetService<ForEvolveLocalizationOptions>();
-            if (locOptions == null)
-            {
-                throw new NullReferenceException($"{nameof(ForEvolveLocalizationOptions)} was not found. Please make sure that `services.AddForEvolveLocalization()` has been called in the `ConfigureServices(IServiceCollection services)` method.");
-            }
-            app.UseRequestLocalization();
-            return app;
+            return app.UseRequestLocalization();
         }
     }
 }

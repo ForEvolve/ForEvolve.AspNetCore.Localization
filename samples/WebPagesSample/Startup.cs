@@ -44,7 +44,7 @@ namespace WebPagesSample
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            app.UseForEvolveRequestLocalization();
+            app.UseRequestLocalization();
 #if NET2
             app.UseMvc();
 #else

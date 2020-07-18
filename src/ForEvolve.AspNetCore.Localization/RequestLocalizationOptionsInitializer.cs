@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using System;
 using System.Globalization;
+using System.Linq;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

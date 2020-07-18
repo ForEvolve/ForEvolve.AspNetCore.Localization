@@ -208,7 +208,10 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 
 -   Remove the need to call `IServiceCollection.AddForEvolveLocalization()` (see #27)
 -   Rename `IMvcBuilder.AddForEvolveMvcLocalization()` to `IMvcBuilder.AddForEvolveLocalization()`
--   Refactor `ForEvolveLocalizationOptions` to leverage the Asp.Net Core options patterns
+-   Leverage the options patterns to configure Asp.Net instead of custom options.
+    -   `ForEvolveLocalizationOptions` and `ForEvolveMvcDefaultLocalizationAdapterOptions` has been deleted
+-   `IApplicationBuilder.UseForEvolveRequestLocalization()` is now obsolete, use `IApplicationBuilder.UseRequestLocalization()` instead.
+-   Add property `SupportedAttributes` to `ILocalizationValidationAttributeAdapter`
 -   Use `Nerdbank.GitVersioning` to manage versions automagically.
 -   Move builds from Azure DevOps to GitHub Actions
 

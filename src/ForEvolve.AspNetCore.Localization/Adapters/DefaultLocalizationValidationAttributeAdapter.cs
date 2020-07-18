@@ -10,13 +10,20 @@ namespace ForEvolve.AspNetCore.Localization.Adapters
 {
     public class DefaultLocalizationValidationAttributeAdapter : ILocalizationValidationAttributeAdapter
     {
-        public IList<string> SupportedAttributes { get; }
-
-        public DefaultLocalizationValidationAttributeAdapter(ForEvolveMvcDefaultLocalizationAdapterOptions options)
+        public IList<string> SupportedAttributes { get; } = new List<string>(new string[]
         {
-            if (options == null) { throw new ArgumentNullException(nameof(options)); }
-            SupportedAttributes = options.SupportedAttributes;
-        }
+            nameof(CompareAttribute),
+            nameof(EmailAddressAttribute),
+            nameof(RequiredAttribute),
+            nameof(CreditCardAttribute),
+            nameof(FileExtensionsAttribute),
+            nameof(MaxLengthAttribute),
+            nameof(MinLengthAttribute),
+            nameof(PhoneAttribute),
+            nameof(RangeAttribute),
+            nameof(RegularExpressionAttribute),
+            nameof(UrlAttribute)
+        });
 
         public bool CanHandle(ValidationAttribute attribute)
         {
