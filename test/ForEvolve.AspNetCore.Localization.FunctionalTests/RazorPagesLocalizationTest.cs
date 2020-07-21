@@ -26,7 +26,7 @@ namespace ForEvolve.AspNetCore.Localization
         public RazorPagesLocalizationTest(WebApplicationFactory<Startup> factory)
         {
             if (factory == null) { throw new ArgumentNullException(nameof(factory)); }
-            
+
             // We don't need Antiforgery for tests
             _factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(services => services
                 .PostConfigure<RazorPagesOptions>(options => options.Conventions
@@ -49,7 +49,7 @@ namespace ForEvolve.AspNetCore.Localization
             var jsonModel = JsonConvert.SerializeObject(model);
             var dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonModel);
 
-            var formContent = new FormUrlEncodedContent(dictionary.Select(kv 
+            var formContent = new FormUrlEncodedContent(dictionary.Select(kv
                 => new KeyValuePair<string, string>($"Model.{kv.Key}", kv.Value)));
 
             // Post the "form"
@@ -84,18 +84,18 @@ namespace ForEvolve.AspNetCore.Localization
         {
             Assert.Collection(errorMessages,
                 message => Assert.Equal("Les champs 'Compare1' et 'Compare2' ne sont pas identiques.", message),
-                message => Assert.Equal("Le champ CreditCard est un numÈro de carte de crÈdit invalide.", message),
+                message => Assert.Equal("Le champ CreditCard est un num√©ro de carte de cr√©dit invalide.", message),
                 message => Assert.Equal("Le champ EmailAddress est une adresse courriel invalide.", message),
                 message => Assert.Equal("Le champ FileExtensions accepte uniquement les fichiers aux extensions suivantes: .png, .jpg, .jpeg, .gif", message),
                 message => Assert.Equal("Le champ MaxLength doit avoir une longueur maximum de '5'.", message),
                 message => Assert.Equal("Le champ MinLength doit avoir une longueur minimum de '5'.", message),
-                message => Assert.Equal("Le champ Phone est un numÈro de tÈlÈphone invalide.", message),
-                message => Assert.Equal("Le champ Range doit Ítre entre 10 et 20.", message),
-                message => Assert.Equal("Le champ RegularExpression doit correspondre ‡ l'expression rÈguliËre '[a-z]'.", message),
+                message => Assert.Equal("Le champ Phone est un num√©ro de t√©l√©phone invalide.", message),
+                message => Assert.Equal("Le champ Range doit √™tre entre 10 et 20.", message),
+                message => Assert.Equal("Le champ RegularExpression doit correspondre √† l'expression r√©guli√®re '[a-z]'.", message),
                 message => Assert.Equal("Le champ Required est requis.", message),
-                message => Assert.Equal("Le champ StringLength doit Ítre composÈ d'un maximum de 5 caractËres.", message),
-                message => Assert.Equal("Le champ StringLengthIncludingMinimum doit Ítre entre 3 et 5 caractËres.", message),
-                message => Assert.Equal("Le champ Website n'est pas une URL pleinement qualifiÈe valide, commenÁant par HTTP, HTTP ou FTP.", message)
+                message => Assert.Equal("Le champ StringLength doit √™tre compos√© d'un maximum de 5 caract√®res.", message),
+                message => Assert.Equal("Le champ StringLengthIncludingMinimum doit √™tre entre 3 et 5 caract√®res.", message),
+                message => Assert.Equal("Le champ Website n'est pas une URL pleinement qualifi√©e valide, commen√ßant par HTTP, HTTP ou FTP.", message)
             );
         }
     }

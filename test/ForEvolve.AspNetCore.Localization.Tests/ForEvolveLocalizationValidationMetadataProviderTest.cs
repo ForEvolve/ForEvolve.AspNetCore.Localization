@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
@@ -35,7 +36,7 @@ namespace ForEvolve.AspNetCore.Localization
             public void Should_set_adapters_to_empty_when_null()
             {
                 // Act
-                var provider = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationTestResource>();
+                var provider = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationTestResource>(default);
 
                 // Assert
                 Assert.Empty(provider.Adapters);
@@ -43,6 +44,8 @@ namespace ForEvolve.AspNetCore.Localization
 
             private class MyAdapter : ILocalizationValidationAttributeAdapter
             {
+                public IList<string> SupportedAttributes => throw new NotSupportedException();
+
                 public bool CanHandle(ValidationAttribute attribute)
                 {
                     throw new NotSupportedException();
@@ -62,7 +65,7 @@ namespace ForEvolve.AspNetCore.Localization
             public CreateValidationMetadata()
             {
                 MyMockAdapter = new Mock<ILocalizationValidationAttributeAdapter>();
-                ProvierUnderTest = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationTestResource>(MyMockAdapter.Object);
+                ProvierUnderTest = new ForEvolveLocalizationValidationMetadataProvider<DataAnnotationTestResource>(new[] { MyMockAdapter.Object });
             }
 
             [Fact]

@@ -24,18 +24,36 @@ namespace WebPagesSample
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddForEvolveLocalization()
+#if NET2
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddForEvolveMvcLocalization();
+#else
+                .AddRazorPages()
+#endif
+                .AddForEvolveLocalization()
+            ;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+#if NET2
+            IHostingEnvironment env
+#else
+            IWebHostEnvironment env
+#endif
+        )
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            app.UseForEvolveRequestLocalization();
+            app.UseRequestLocalization();
+#if NET2
             app.UseMvc();
+#else
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+            });
+#endif
         }
     }
 }
