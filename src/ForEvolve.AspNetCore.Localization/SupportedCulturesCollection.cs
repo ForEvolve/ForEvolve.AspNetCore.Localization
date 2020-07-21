@@ -11,7 +11,7 @@ namespace ForEvolve.AspNetCore.Localization
 {
     public class SupportedCulturesCollection : ISupportedCulturesCollection
     {
-        private readonly ImmutableList<CultureInfo> _supportedCultures = new[]
+        private static readonly ImmutableList<CultureInfo> _supportedCultures = new[]
         {
             new CultureInfo("en"),
             new CultureInfo("fr"),
