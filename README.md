@@ -6,6 +6,10 @@
 
 The [ForEvolve.AspNetCore.Localization](https://github.com/ForEvolve/ForEvolve.AspNetCore.Localization) package allows you to enable localization of Asp.Net Core 2.1+ applications in one line of code. Moreover, it translates `System.ComponentModel.DataAnnotations.ValidationAttribute`s automagically, without the need to specify any string or error message (like the `[Required]` attribute).
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/CarlHugoM?style=for-the-badge&logo=twitter)](https://twitter.com/intent/follow?screen_name=CarlHugoM)
+[![GitHub Sponsor](https://img.shields.io/static/v1?style=for-the-badge&label=Sponsor&message=%E2%9D%A4&logo=GitHub&color&link=%3curl%3e)](https://github.com/sponsors/Carl-hugo)
+[![PayPal Me](https://img.shields.io/static/v1?style=for-the-badge&label=Donate&message=%E2%9D%A4&logo=Paypal&color&link=%3curl%3e)](https://paypal.me/CarlHugo?locale.x=en_US)
+
 ## Supported languages:
 
 -   `English (en)` original error messages modified by [Carl-Hugo Marcotte](https://github.com/Carl-Hugo)
